@@ -1,0 +1,24 @@
+.header {
+  &__container {
+    width: 100vw;
+    height: 100px;
+    @include flex(space-between, center);
+    padding: 0 100px 0 20px;
+  }
+
+  &__logo{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+  }
+}
+
+.logo-img {
+  width: 54px;
+  height: 57px;
+}
+
+.logo-text {
+  @include text-prop-lato(700,36px,42px,$primary-color);
+}
+

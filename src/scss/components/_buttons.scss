@@ -1,0 +1,37 @@
+.btn {
+  background-color: $main-color;
+  @include text-prop-lato(700,22px,22px,$light-color);
+  color: #ffffff;
+  border:none;
+  border-radius: 50px;
+  padding: 0 10px;
+  cursor: pointer;
+  transition: all 0.25s;
+  min-width: 120px ;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &--big {
+    padding: 10px 20px 10px 20px;
+  }
+
+
+  &--small {
+    margin-top: 20px;
+    padding: 5px 40px;
+    font-size: 18px;
+  }
+
+  &--hide {
+    display: none;
+  }
+
+  &--bg-prime {
+    background-color: $text-color;
+  }
+
+}
+
+

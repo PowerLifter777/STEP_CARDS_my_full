@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+@@include('html/head.html',{
+"title":"ASV Medical Center"
+})
+
+<body>
+    <div class="wrapper">
+        @@include('html/header.html',{})
+        <main class="main">
+            @@include('html/search.html',{})
+            @@include('html/cards.html',{})
+        </main>
+    </div>
+
+
+    <div class="modal modal--hide">
+        <div class="modal__content-wrapper modal__content-wrapper--login">
+            <span class="modal-close">&times;</span>
+            <div class="modal__content">
+                <h3 class="modal__content-title">Welcome Back</h3>
+                <div class="modal__content-img">
+                    <img class="modal__content-icon" src="./dist/assets/images/log-icon.png" alt="login">
+                </div>
+
+                <form class="form-login">
+                    <input class="form-login__input" type="text" name="username" placeholder="email">
+                    <input class="form-login__input" type="password" id="password" name="password"
+                        placeholder="password">
+                    <button class="btn btn--small" type="submit">login</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal modal--hide">
+        <!-- <div class="modal__content-wrapper modal__content-wrapper--visit"> 
+            <span class="modal-close">&times;</span>
+            <div class="modal__content modal__content--visit">
+                <h3 class="modal__content-title modal__content-title--visit">VISIT FORM</h3>
+                <div class="modal__content-img">
+                    <img class="modal__content-icon modal__content-icon--visit" src="./dist/assets/images/patient.png"
+                        alt="LOGO"> -->
+        <!--                <img class="modal__content-icon modal__content-icon&#45;&#45;visit" src="./dist/assets/images/logo.png" alt="LOGO">-->
+        <!-- </div>
+
+                <form class="form-visit">
+
+                    <label class="form-visit__label">Doctor
+                        <select class="form-visit__select" id="select-doctor" name="specialist">
+                            <option value="">Select specialist</option>
+                            <option value="cardiologist">Cardiologist</option>
+                            <option value="dentist">Dentist</option>
+                            <option value="therapist">Therapist</option>
+                        </select>
+                    </label>
+
+                    <label class="form-visit__label" id="form-purpose">Purpose of the visit
+                        <input class="form-visit__input" type="text" id="purpose" name="purpose"
+                            placeholder="Enter purpose of the visit">
+                    </label>
+
+                    <label class="form-visit__label" id="form-description">Description of the visit
+                        <input class="form-visit__input" type="text" id="description" name="description"
+                            placeholder="Enter description of the visit">
+                    </label>
+
+                    <label class="form-visit__label" id="form-urgency">Urgency of the visit
+                        <div class="label-container-radio">
+                            <label class="form-visit__label--radio"> Normal
+                                <input type="radio" name="urgency" id="urgency-normal" value="Normal" checked>
+                            </label>
+
+                            <label class="form-visit__label--radio"> Priority
+                                <input type="radio" name="urgency" id="urgency-priority" value="Priority">
+                            </label>
+
+                            <label class="form-visit__label--radio"> Urgent
+                                <input type="radio" name="urgency" id="urgency-urgent" value="Urgent">
+                            </label>
+
+                        </div>
+                    </label>
+
+                    <label class="form-visit__label" id="form-patient-name">Patient name
+                        <input class="form-visit__input" type="text" id="patient-name" name="patient-name"
+                            placeholder="Enter full patient name">
+                    </label>
+                    <div class="form-visit__specialist">
+
+                    </div> -->
+
+        <!-- <label class="form-visit__label" id="form-date">Date of last visit
+                    <input class="form-visit__input" type="date" id="visit" name="visit"
+                           placeholder="Enter date of last visit">
+                </label> -->
+
+        <!-- <label class="form-visit__label" id="form-pressure">Normal pressure
+                    <div class="form-pressure__container">
+                        <input class="form-visit__input form-visit__input--shot" type="number" id="pressure-top"
+                               name="pressure" placeholder="top">
+                        <span>&#8260;</span>
+                        <input class="form-visit__input form-visit__input--shot" type="number" id="pressure-bottom"
+                               name="pressure" placeholder="bottom">
+                    </div>
+                </label>
+
+                <label class="form-visit__label" id="form-body-mass">Body mass index
+                    <div class="form-body-mass__container">
+                    <output class="form-visit__label-output">25</output>
+                    <input oninput="this.previousElementSibling.value = this.value" class="form-visit__input"
+                           type="range" min="0" max="50" step="1" value="25" id="mass-index" name="mass-index"
+                           placeholder="Enter patient body mass index">
+                    </div>
+                </label>
+
+                <label class="form-visit__label" id="form-past-diseases">Past diseases of the cardiovascular system
+                    <textarea class="form-visit__text-area"
+                              placeholder="Enter pacient past diseases of the cardiovascular system"></textarea>
+                </label>
+
+                <label class="form-visit__label" id="form-age">Patient age
+                    <input class="form-visit__input form-visit__input--shot" type="number" id="age" name="age" placeholder="Age">
+                </label>
+
+                <button class="btn btn--big btn--bg-prime" type="submit">Create visit</button> -->
+        <!-- </form>
+            </div>
+        </div> -->
+    </div>
+
+    <script src="dist/js/main.min.js"></script>
+</body>
+
+</html>

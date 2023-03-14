@@ -1,0 +1,415 @@
+.cards {
+  margin-top: 50px;
+}
+
+.no-content,
+.no-search {
+  display: block;
+  @include text-prop-lato(700, 30px, 30px, firebrick);
+  font-family: Lato, sans-serif;
+  text-align: center;
+
+  &--hide {
+    display: none;
+  }
+}
+
+.cards__content {
+  //display: none;
+  padding: 10px;
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 30px;
+}
+
+.card {
+
+  &__container {
+    position: relative;
+    padding: 20px;
+    padding-top: 40px;
+    width: 400px;
+    background-image: linear-gradient(109.6deg, rgba(24, 138, 141, 0.5) 11.2%, rgba(127, 167, 170, 0.5) 91.1%);
+    //background-color: rgba(31, 140, 167, 0.5);
+    border-radius: 20px;
+    @include flex-column();
+    row-gap: 10px;
+  }
+
+  &-change {
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: $light-color;
+    font-size: 30px;
+    transition: all 0.25s;
+    cursor: pointer;
+
+    &:hover {
+      color: #bf1212;
+    }
+  }
+
+  &-del {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    color: $light-color;
+    transition: all 0.25s;
+    cursor: pointer;
+
+    &:hover {
+      color: #bf1212;
+    }
+
+  }
+
+  &__element {
+    background-color: rgba(214, 234, 245, 0.8);
+    border-radius: 5px;
+  }
+
+  &-title {
+    margin-top: 10px;
+    display: flex;
+    column-gap: 10px;
+    padding: 5px;
+
+    &__doctor {
+      padding: 5px;
+      border-bottom: 3px solid $primary-color;
+      @include flex-column();
+      width: 64%;
+      row-gap: 10px;
+
+      &-head {
+        @include text-prop-lato(600, 20px, 20px, $light-text-color);
+        text-decoration: underline rgba(128, 128, 128, 0.5) 2px;
+      }
+
+      &-text {
+        display: flex;
+        column-gap: 10px;
+        align-items: center;
+
+        &-value {
+          @include text-prop-lato(600, 18px, 18px, $primary-color);
+          text-transform: capitalize;
+        }
+      }
+    }
+
+    &__status {
+      padding: 5px;
+      @include flex-column();
+      row-gap: 10px;
+      width: 36%;
+      border-radius: 5px;
+      background-image: #1f8ca7;
+      @include text-prop-lato(600, 16px, 16px, #003736);
+
+      &-text {
+        font-family: Lato, sans-serif;
+        letter-spacing: 0.8px;
+        background-color: #FFFFFF;
+        color: firebrick;
+        padding: 5px;
+        text-align: center;
+        border-radius: 8px;
+        border: transparent;
+        cursor: pointer;
+        transition: transform 0.25s ease-out;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      &-text:active {
+        transform: scale(1);
+      }
+    }
+  }
+
+  &-visit-done {
+    opacity: 0.4;
+  }
+}
+
+.card-main {
+  display: flex;
+  column-gap: 10px;
+  padding: 5px;
+
+  &__patient {
+    border-bottom: 3px solid $primary-color;
+    padding: 5px;
+    @include flex-column();
+    width: 64%;
+    row-gap: 10px;
+
+    &-head {
+      @include flex();
+      justify-content: space-between;
+
+      &-title {
+        @include text-prop-lato(600, 20px, 20px, $light-text-color);
+        text-decoration: underline rgba(128, 128, 128, 0.5) 2px;
+      }
+
+      &-age {
+        @include text-prop-lato(600, 18px, 18px, #660707);
+        @include flex();
+        column-gap: 5px;
+
+        &-val {
+          padding: 10px;
+          background-color: $main-color;
+          color: #FFFFFF;
+          border-radius: 50%;
+          font-size: 22px;
+        }
+      }
+    }
+
+    &-text {
+
+      @include text-prop-lato(600, 18px, 18px, $primary-color);
+    }
+  }
+
+  &__urgency {
+    width: 36%;
+    padding: 5px;
+
+
+    border-radius: 5px;
+    align-items: center;
+    @include flex-column();
+    row-gap: 10px;
+
+    &-head {
+      @include text-prop-lato(600, 18px, 18px, #d6eaf5);
+      padding: 10px;
+      background-color: #00579b;
+      border-radius: 10px;
+    }
+
+    &-body {
+
+      padding: 5px;
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      background-color: #FFFFFF;
+      @include flex-column();
+      align-items: center;
+      row-gap: 3px;
+
+
+
+    }
+
+
+  }
+}
+
+.urgency-body__elem {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #00579b;
+
+  &--normal {
+    background-color: #7acb08;
+  }
+
+  &--priority {
+    background-color: #e0b911;
+  }
+
+  &--urgent {
+    background-color: #c41414;
+  }
+
+}
+
+.card-show-more {
+  padding: 5px 20px;
+  @include flex-column();
+  row-gap: 10px;
+  align-items: center;
+
+  &__btn {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: $light-text-color;
+    @include text-prop-lato(700, 16px, 16px, $light-color);
+    cursor: pointer;
+  }
+
+  &__icon {
+    width: 15px;
+    height: 15px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &--hide {
+    display: none;
+  }
+}
+
+.card-hide-more {
+  padding: 5px 20px;
+  @include flex-column();
+  row-gap: 10px;
+  align-items: center;
+
+  &__btn {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: $light-text-color;
+    @include text-prop-lato(700, 16px, 16px, $light-color);
+    cursor: pointer;
+  }
+
+  &__icon {
+    width: 15px;
+    height: 15px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &--hide {
+    display: none;
+  }
+}
+
+
+.card-additional {
+  @include flex-column();
+  row-gap: 10px;
+
+
+  &__purpose {
+    border-radius: 5px;
+    background-color: rgba(214, 234, 245, 0.8);
+    @include flex-column();
+    row-gap: 10px;
+    padding: 5px;
+
+
+    &-title {
+      @include text-prop-lato(600, 18px, 18px, $light-text-color);
+      text-decoration: underline rgba(128, 128, 128, 0.5) 2px;
+    }
+
+    &-text {
+      @include text-prop-lato(600, 18px, 18px, $primary-color);
+    }
+  }
+
+  &__description {
+    border-radius: 5px;
+    background-color: rgba(214, 234, 245, 0.8);
+    @include flex-column();
+    row-gap: 10px;
+    padding: 5px;
+
+    &-title {
+      @include text-prop-lato(600, 18px, 18px, $light-text-color);
+      text-decoration: underline rgba(128, 128, 128, 0.5) 2px;
+    }
+
+    &-text {
+      @include text-prop-lato(600, 18px, 18px, $primary-color);
+    }
+
+  }
+
+  &__imt {
+    background-color: rgba(214, 234, 245, 0.8);
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    column-gap: 5px;
+
+    &-title {
+      @include text-prop-lato(600, 18px, 18px, $light-text-color);
+      text-decoration: underline rgba(128, 128, 128, 0.5) 2px;
+    }
+
+    &-text {
+      @include text-prop-lato(600, 18px, 18px, $primary-color);
+    }
+  }
+
+  &__date {
+    background-color: rgba(214, 234, 245, 0.8);
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    column-gap: 5px;
+
+    &-title {
+      @include text-prop-lato(600, 18px, 18px, $light-text-color);
+      text-decoration: underline rgba(128, 128, 128, 0.5) 2px;
+    }
+
+    &-text {
+      @include text-prop-lato(600, 18px, 18px, $primary-color);
+    }
+  }
+
+
+  &__pressure {
+    background-color: rgba(214, 234, 245, 0.8);
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    column-gap: 5px;
+
+    &-title {
+      @include text-prop-lato(600, 18px, 18px, $light-text-color);
+      text-decoration: underline rgba(128, 128, 128, 0.5) 2px;
+    }
+
+    &-text {
+      @include text-prop-lato(600, 18px, 18px, $primary-color);
+    }
+  }
+
+  &__diseases {
+    border-radius: 5px;
+    background-color: rgba(214, 234, 245, 0.8);
+    @include flex-column();
+    row-gap: 10px;
+    padding: 5px;
+
+    &-title {
+      @include text-prop-lato(600, 18px, 18px, $light-text-color);
+      text-decoration: underline rgba(128, 128, 128, 0.5) 2px;
+    }
+
+    &-text {
+      @include text-prop-lato(600, 18px, 18px, $primary-color);
+
+    }
+  }
+
+  &--hide {
+    display: none;
+  }
+}
+
+.doctor-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}

@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="dist/css/style.min.css?_v=20230314170957">
+  <title>ASV Medical Center</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+    <div class="header__container">
+        <div class="header__logo">
+            <picture><source srcset="./dist/assets/images/logo.webp" type="image/webp"><img class="logo-img" src="./dist/assets/images/logo.png" alt="logo"></picture>
+            <h3 class="logo-text">ASV Medical Center</h3>
+        </div>
+        <button class="btn btn--big">LOGIN</button>
+        <button class="btn btn--big btn--bg-prime btn--hide">CREATE VISIT</button>
+    </div>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <main class="main">
+            <section class="search">
+  <div class="search__container">
+    <form class="search-form">
+      <input class="search-form__input" type="text" name="search-text" placeholder="Search by title or content">
+      <select class="search-form__select" name="search-status">
+        <option value="">Search by status</option>
+        <option value="open">Open</option>
+        <option value="done">Done</option>
+      </select>
+      <select class="search-form__select" name="search-priority">
+        <option value="">Search by urgency</option>
+        <option value="urgent">Urgent</option>
+        <option value="priority">Priority</option>
+        <option value="normal">Normal</option>
+      </select>
+      <button class="btn btn--bg-prime" type="button" name="search-button">Search</button>
+      <button class="btn btn--bg-prime" type="button" name="search-all">Show All</button>
+    </form>
+  </div>
+</section>
+            <section class="cards">
+    <h3 class="no-content no-content--hide">No items have been added</h3>
+    <h3 class="no-search no-search--hide">Sorry, no cards...</h3>
+    <div class="cards__content">
+
+        <!-- <div class="card">
+            <div class="card__container">
+
+                <span class="card-change">&#9998;</span>
+
+                <span class="card-del">&#10006;</span>
+
+                <div class="card__element card-title">
+                    <div class="card-title__doctor">
+                        <div class="card-title__doctor-head">DOCTOR:</div>
+                        <div class="card-title__doctor-text">
+                            <div class="card-title__doctor-text-icon">
+                                <picture><source srcset="./dist/assets/images/сard/therapist.webp" type="image/webp"><img class="doctor-icon" src="./dist/assets/images/сard/therapist.png" alt="img"></picture>
+                            </div>
+                            <p class="card-title__doctor-text-value">Therapist</p>
+                        </div>
+                    </div>
+                    <div class="card-title__status">
+                        <div class="card-title__status-head">VISIT STATUS:</div>
+                        <div class="card-title__status-text">OPEN</div>
+                    </div>
+                </div>
+
+                <div class="card__element card-main">
+                    <div class="card-main__patient">
+                        <div class="card-main__patient-head">
+                            <p class="card-main__patient-head-title">PACIENT:</p>
+                            <p class="card-main__patient-head-age">AGE:<span class="card-main__patient-head-age-val">34</span></p>
+                        </div>
+                        <div class="card-main__patient-text">
+                            Alexander Zinchenko
+                        </div>
+                    </div>
+                    <div class="card-main__urgency">
+                        <div class="card-main__urgency-head">URGENCY</div>
+                        <div class="card-main__urgency-body" data-urgency="normal">
+                            <div class="urgency-body__elem urgency-body__elem--normal"></div>
+                            <div class="urgency-body__elem urgency-body__elem--priority"></div>
+                            <div class="urgency-body__elem urgency-body__elem--urgency"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-additional">
+
+                    <div class="card-additional__purpose">
+                        <div class="card-additional__purpose-title">PURPOSE OF THE TARGET:</div>
+                        <div class="card-additional__purpose-text">Some target</div>
+                    </div>
+
+                    <div class="card-additional__description">
+                        <div class="card-additional__description-title">DESCRIPTION:</div>
+                        <div class="card-additional__description-text">Some target</div>
+                    </div>
+
+                    <div class="card-additional__date">
+                        <div class="card-additional__date-title">DATE OF LAST VISIT:</div>
+                        <div class="card-additional__date-text">10.02.2022</div>
+                    </div>
+
+                    <div class="card-additional__imt">
+                        <div class="card-additional__imt-title">IMT:</div>
+                        <div class="card-additional__imt-text">35 IMT</div>
+                    </div>
+
+                    <div class="card-additional__pressure">
+                        <div class="card-additional__pressure-title">PRESSURE:</div>
+                        <div class="card-additional__pressure-text">120/60 mmHg</div>
+                    </div>
+
+
+                    <div class="card-additional__diseases">
+                        <div class="card-additional__diseases-title">DISEASES OF THE CARDIOVASCULAR:</div>
+                        <div class="card-additional__diseases-text">Some description</div>
+                    </div>
+
+                </div>
+
+                <div class="card-show-more">
+                    <button class="card-show-more__btn">SHOW MORE DETAILS</button>
+                    <picture><source srcset="./dist/assets/images/icon-down.webp" type="image/webp"><img class="card-show-more__icon" src="./dist/assets/images/icon-down.png" alt="icon"></picture>
+                </div>
+
+
+                <div class="card-hide-more">
+                    <button class="card-hide-more__btn">HIDE MORE DETAILS</button>
+                    <picture><source srcset="./dist/assets/images/icon-up.webp" type="image/webp"><img class="card-hide-more__icon" src="./dist/assets/images/icon-up.png" alt="icon"></picture>
+                </div>
+
+
+
+            </div>
+        </div> -->
+
+
+
+
+
+
+    </div>
+</section>
+        </main>
+    </div>
+
+
+    <div class="modal modal--hide">
+        <div class="modal__content-wrapper modal__content-wrapper--login">
+            <span class="modal-close">&times;</span>
+            <div class="modal__content">
+                <h3 class="modal__content-title">Welcome Back</h3>
+                <div class="modal__content-img">
+                    <picture><source srcset="./dist/assets/images/log-icon.webp" type="image/webp"><img class="modal__content-icon" src="./dist/assets/images/log-icon.png" alt="login"></picture>
+                </div>
+
+                <form class="form-login">
+                    <input class="form-login__input" type="text" name="username" placeholder="email">
+                    <input class="form-login__input" type="password" id="password" name="password"
+                        placeholder="password">
+                    <button class="btn btn--small" type="submit">login</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal modal--hide">
+        <!-- <div class="modal__content-wrapper modal__content-wrapper--visit"> 
+            <span class="modal-close">&times;</span>
+            <div class="modal__content modal__content--visit">
+                <h3 class="modal__content-title modal__content-title--visit">VISIT FORM</h3>
+                <div class="modal__content-img">
+                    <img class="modal__content-icon modal__content-icon--visit" src="./dist/assets/images/patient.png"
+                        alt="LOGO"> -->
+        <!--                <picture><source srcset="./dist/assets/images/logo.webp" type="image/webp"><img class="modal__content-icon modal__content-icon&#45;&#45;visit" src="./dist/assets/images/logo.png" alt="LOGO"></picture>-->
+        <!-- </div>
+
+                <form class="form-visit">
+
+                    <label class="form-visit__label">Doctor
+                        <select class="form-visit__select" id="select-doctor" name="specialist">
+                            <option value="">Select specialist</option>
+                            <option value="cardiologist">Cardiologist</option>
+                            <option value="dentist">Dentist</option>
+                            <option value="therapist">Therapist</option>
+                        </select>
+                    </label>
+
+                    <label class="form-visit__label" id="form-purpose">Purpose of the visit
+                        <input class="form-visit__input" type="text" id="purpose" name="purpose"
+                            placeholder="Enter purpose of the visit">
+                    </label>
+
+                    <label class="form-visit__label" id="form-description">Description of the visit
+                        <input class="form-visit__input" type="text" id="description" name="description"
+                            placeholder="Enter description of the visit">
+                    </label>
+
+                    <label class="form-visit__label" id="form-urgency">Urgency of the visit
+                        <div class="label-container-radio">
+                            <label class="form-visit__label--radio"> Normal
+                                <input type="radio" name="urgency" id="urgency-normal" value="Normal" checked>
+                            </label>
+
+                            <label class="form-visit__label--radio"> Priority
+                                <input type="radio" name="urgency" id="urgency-priority" value="Priority">
+                            </label>
+
+                            <label class="form-visit__label--radio"> Urgent
+                                <input type="radio" name="urgency" id="urgency-urgent" value="Urgent">
+                            </label>
+
+                        </div>
+                    </label>
+
+                    <label class="form-visit__label" id="form-patient-name">Patient name
+                        <input class="form-visit__input" type="text" id="patient-name" name="patient-name"
+                            placeholder="Enter full patient name">
+                    </label>
+                    <div class="form-visit__specialist">
+
+                    </div> -->
+
+        <!-- <label class="form-visit__label" id="form-date">Date of last visit
+                    <input class="form-visit__input" type="date" id="visit" name="visit"
+                           placeholder="Enter date of last visit">
+                </label> -->
+
+        <!-- <label class="form-visit__label" id="form-pressure">Normal pressure
+                    <div class="form-pressure__container">
+                        <input class="form-visit__input form-visit__input--shot" type="number" id="pressure-top"
+                               name="pressure" placeholder="top">
+                        <span>&#8260;</span>
+                        <input class="form-visit__input form-visit__input--shot" type="number" id="pressure-bottom"
+                               name="pressure" placeholder="bottom">
+                    </div>
+                </label>
+
+                <label class="form-visit__label" id="form-body-mass">Body mass index
+                    <div class="form-body-mass__container">
+                    <output class="form-visit__label-output">25</output>
+                    <input oninput="this.previousElementSibling.value = this.value" class="form-visit__input"
+                           type="range" min="0" max="50" step="1" value="25" id="mass-index" name="mass-index"
+                           placeholder="Enter patient body mass index">
+                    </div>
+                </label>
+
+                <label class="form-visit__label" id="form-past-diseases">Past diseases of the cardiovascular system
+                    <textarea class="form-visit__text-area"
+                              placeholder="Enter pacient past diseases of the cardiovascular system"></textarea>
+                </label>
+
+                <label class="form-visit__label" id="form-age">Patient age
+                    <input class="form-visit__input form-visit__input--shot" type="number" id="age" name="age" placeholder="Age">
+                </label>
+
+                <button class="btn btn--big btn--bg-prime" type="submit">Create visit</button> -->
+        <!-- </form>
+            </div>
+        </div> -->
+    </div>
+
+    <script src="dist/js/main.min.js?_v=20230314170957"></script>
+</body>
+
+</html>

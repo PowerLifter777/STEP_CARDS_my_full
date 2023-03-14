@@ -1,0 +1,25 @@
+@mixin text-prop-lato($fw:400,$fs:14px,$lh:14px,$color:#FFFFFF) {
+  font-family: Lato, sans-serif;
+  font-weight: $fw;
+  font-size: $fs;
+  line-height: $lh;
+  color: $color;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin bg-img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@mixin flex($horizontal: center, $vertical: center) {
+  display: flex;
+  justify-content: $horizontal;
+  align-items: $vertical;
+}
+
