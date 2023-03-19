@@ -42,8 +42,12 @@ export const CreateNewCard = async (jsonStringifyData) => {
         },
         body: jsonStringifyData,
     });
-    // const result = response;
-    return response;
+    if (response.status === 200) {
+        return response.json();
+    } else {
+        alert('Не удалось создать карточку. Сервер не доступен');
+        return;
+    }
 }
 
 export const DeleteCardByID = async (id) => {

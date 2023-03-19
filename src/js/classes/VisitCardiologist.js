@@ -14,7 +14,7 @@ export class VisitCardiologist extends VISIT {
             pressure: this.pressure,
             BMI: this.BMI,
             diseases: this.diseases,
-            age: this.age,
+            age: this.age, 
         }
         return this.sendVisitDataToServer(data);
     }

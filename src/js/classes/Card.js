@@ -1,19 +1,20 @@
-import { mainObject, createEditModal, renderCards, checkContent, DeleteCardByID, EditCardByID } from "../tools/index.js";
-import { filterCards } from "../components/header/index.js";
+import { mainObject, createEditModal, checkContent, DeleteCardByID, EditCardByID } from "../tools/index.js";
+import { renderFilteredCards } from "../components/header/index.js";
 export class Card {
-    constructor({ id, doctor, purpose, description, urgency, patient, pressure, BMI, diseases, age, lastVisit, status }) {
+    constructor({ id, doctor, purpose, description, urgency, patient, pressure, BMI, diseases, age, lastVisit, status, date }) {
         this.id = id;
         this.doctor = doctor;
         this.purpose = purpose;
         this.description = description;
         this.urgency = urgency;
         this.patient = patient;
-        this.status = status || '';
-        this.pressure = pressure || null;
-        this.BMI = BMI || null;
-        this.diseases = diseases || null;
-        this.age = age || null;
-        this.lastVisit = lastVisit || null;
+        this.status = status;
+        if (diseases) this.diseases = diseases;
+        if (BMI) this.BMI = BMI;
+        if (pressure) this.pressure = pressure;
+        if (lastVisit) this.lastVisit = lastVisit;
+        if (age) this.age = age;
+        this.date = date;
     }
     // Отрисовка карточки на странице со всеми доступными полями
     render() {
@@ -21,9 +22,10 @@ export class Card {
         const card = document.createElement('div');
         card.classList.add('card');
         card.setAttribute('id', this.id);
-        cardWrapper.prepend(card);
+        cardWrapper.append(card);
         card.insertAdjacentHTML('afterbegin', `
             <div class="card__container">
+                <span class="card-date">Last update:<br>${this.date}</span>
                 <span class="card-change">✎</span>
                 <span class="card-del">✖</span>
                 <div class="card__element card-title">
@@ -133,6 +135,7 @@ export class Card {
         moreBtn.parentNode.classList.add('card-show-more--hide');
         hideBtn.parentNode.classList.remove('card-hide-more--hide');
         additionalInfo.classList.remove('card-additional--hide');
+        // this.style.zIndex = 10;
     }
 
     hideDetails(moreBtn, hideBtn, additionalInfo) {
@@ -148,7 +151,7 @@ export class Card {
 
     // Изменение статуса визита при клике. Отправка изменений на сервер.
     async changeStatus(btn) {
-        const requestForChange = (status) => this.saveChangesOnServer({ ...this, status: status });
+        const requestForChange = (status) => this.saveChangesOnServer({ ...this, status: status }); //Обновление даты при изменении статуса date: new Date().toLocaleString('ua').slice(0, -3) 
 
         if (btn.textContent === 'OPEN' && await requestForChange('done')) {
             btn.innerHTML = 'DONE';
@@ -171,11 +174,10 @@ export class Card {
         const response = await EditCardByID(newCardInfo.id, newCardInfo);
         if (response) {
             mainObject.data = mainObject.data.map(obj => obj.id === newCardInfo.id ? newCardInfo : obj);
-            mainObject.data.sort((a, b) => a.id - b.id).sort((a, b) => a.status < b.status ? -1 : a.status < b.status ? 1 : 0);
+            mainObject.sortNow();
             const cardWrapper = document.querySelector('.cards__content');
             cardWrapper.innerHTML = '';
-            renderCards(mainObject.data);
-            filterCards();
+            renderFilteredCards();
         }
         return response;
     }

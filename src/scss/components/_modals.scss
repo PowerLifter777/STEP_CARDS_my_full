@@ -12,12 +12,11 @@
 
   &__content-wrapper {
     position: absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    max-height: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border-radius: 20px;
-    padding: 6px;
+    padding: 10px 16px 20px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -33,22 +32,23 @@
       background-position: center;
       background-size: cover;
       //background-image: url("../assets/images/visit.png");
-      max-height: 700px;
+      // max-height: 640px;
     }
   }
-
+  
   &-close {
     position: absolute;
     top: -35px;
     right: -35px;
     @include text-prop-lato(500, 50px, 50px, $light-color );
     cursor: pointer;
-
+    transition: all 0.25s;
+    
     &:hover {
       color: #bf1212;
+      transform: rotate(90deg);
     }
   }
-
 
   &__content {
     overflow: auto;
@@ -56,63 +56,69 @@
     @include flex-column;
     align-items: center;
     row-gap: 30px;
-    padding: 10px;
-    margin-top:10px;
+    padding-top: 0px;
+    padding-bottom: 40px;
+    margin-top: 10px;
     margin-bottom: 10px;
 
-    &--visit{
+    &--visit {
       width: 400px;
-      max-height: 600px;
-      height: 600px;
+      max-height: 620px;
+      height: 620px;
+
+      &::-webkit-scrollbar {
+        width: 4px;
+        /* ширина всей полосы прокрутки */
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+        /* цвет зоны отслеживания */
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $primary-color;
+        /* цвет бегунка */
+        border-radius: 5px;
+        /* округлось бегунка */
+        // border: 3px solid orange;  /* отступ вокруг бегунка */
+      }
     }
 
-        &-title {
-          @include text-prop-lato(700,26px,26px, $primary-color);
-          text-align: center;
-          margin-top: 30px;
+    &-title {
+      @include text-prop-lato(700, 26px, 26px, $primary-color);
+      text-align: center;
+      margin-top: 30px;
 
-          &--visit {
-            background-color: $primary-color;
-            padding: 10px 70px;
-            border-radius: 20px;
-            color: $light-color;
-            margin-top: 10px;
-          }
+      &--visit {
+        background-color: $primary-color;
+        padding: 10px 70px;
+        border-radius: 20px;
+        color: $light-color;
+        margin-top: 10px;
+      }
+    }
 
-        }
+    &-img {
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
 
-        &-img {
-          display:flex;
-          align-items: center;
-          column-gap: 10px;
+      &-text {
+        @include text-prop-lato(600, 20px, 20px, $primary-color)
+      }
+    }
 
-          &-text{
-            @include text-prop-lato(600, 20px, 20px, $primary-color)
-          }
-        }
-        &-icon {
-          margin-top: 30px;
-          width: 70px;
-          height: 70px;
+    &-icon {
+      margin-top: 30px;
+      width: 70px;
+      height: 70px;
 
-          &--visit {
-            width: 100px;
-            height: 100px;
-            margin-top: 0;
-          }
-        }
+      &--visit {
+        width: 100px;
+        height: 100px;
+        margin-top: 0;
+      }
+    }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,13 +1,16 @@
 .search-form {
 
   display: flex;
-  column-gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
   max-width: 100%;
 
   &__input {
 
     @include text-prop-lato(400, 20px, 20px, $primary-color);
-    width: 400px;
+    width: 300px;
+    height: 40px;
     padding-left: 10px;
     padding-right: 10px;
     text-align: center;
@@ -15,6 +18,7 @@
     border: none;
     background-color: $input-bg-color;
     border-radius: 20px;
+    max-width: 95%;
 
     &::placeholder {
       color: $primary-color;
@@ -23,7 +27,7 @@
 
   &__select {
     height: 40px;
-    width: 300px;
+    width: 250px;
     padding-left: 10px;
     padding-right: 10px;
     @include text-prop-lato(400, 20px, 20px, $primary-color);
@@ -32,7 +36,10 @@
     background-color: $input-bg-color;
     border-radius: 20px;
     text-align: center;
+    max-width: 95%;
+    cursor: pointer;
   }
+
 
 }
 
@@ -56,14 +63,18 @@
       color: #83b3cb;
     }
   }
+
+  button[type=submit].disabled {
+    opacity: 0.4;
+    background-color: #97bad6;
+  }
 }
 
 .form-visit,
 .form-visit__specialist {
   @include flex-column();
   align-items: center;
-  row-gap: 45px;
-  margin-top: 20px;
+  row-gap: 35px;
   width: 100%;
 
   &__select {
@@ -82,16 +93,21 @@
     background-color: $input-bg-color;
     border-radius: 20px;
     text-align: center;
+    cursor: pointer;
 
     & option {
       background-color: #c1eded;
+      cursor: pointer;
 
       &:checked {
         background-color: #d2b74b;
         color: $light-color;
       }
-    }
 
+      &[disabled] {
+        display: none;
+      }
+    }
   }
 
 
@@ -114,7 +130,7 @@
     @include text-prop-lato(700, 18px, 18px, $main-color);
     text-align: center;
     padding: 10px;
-
+    cursor: pointer;
 
     &::placeholder {
       font-family: Lato, sans-serif;
@@ -140,6 +156,13 @@
       color: #83b3cb;
     }
   }
+
+  user-select: none;
+
+  button.submit.disabled {
+    opacity: 0.4;
+    background-color: #97bad6;
+  }
 }
 
 .label-container-radio {
@@ -154,6 +177,7 @@
 .form-visit__label--radio {
   color: $main-color;
   font-size: 20px;
+  cursor: pointer;
 }
 
 .form-pressure__container {
@@ -174,8 +198,6 @@
 .form-visit__label-output {
   color: #00579b;
 }
-
-
 
 .form-body-mass__container {
   @include flex-column();

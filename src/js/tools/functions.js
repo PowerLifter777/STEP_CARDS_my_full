@@ -5,7 +5,7 @@ import { VisitDentist } from "../classes/VisitDentist.js";
 import { VisitTherapist } from "../classes/VisitTherapist.js";
 import { mainObject } from "./dataObject.js";
 import { GetToken, GetAllCards } from "./fetchData.js";
-import { filterCards } from "../components/header/index.js";
+import { renderFilteredCards } from "../components/header/index.js";
 
 /* проверка поддержки Webp, добавление классов */
 export const isWebp = () => {
@@ -25,17 +25,20 @@ export const isWebp = () => {
 }
 
 // Нахожу кнопки логина и создания поста и враппер для модалок.
-const [loginBtn, visitBtn] = document.querySelectorAll('.btn');
-const modalWrapper = document.querySelector('.modal');
-loginBtn.addEventListener('click', () => createLoginForm(modalWrapper, loginBtn, visitBtn));
+const loginBtn = document.body.querySelector('.btn__login');
+const visitBtn = document.body.querySelector('.btn__visit');
+const logOutBtn = document.body.querySelector('.btn__logout');
+const modalWrapper = document.body.querySelector('.modal');
+loginBtn.addEventListener('click', () => createLoginForm(modalWrapper));
 visitBtn.addEventListener('click', () => createVisitForm(modalWrapper));
+logOutBtn.addEventListener('click', () => closeSession());
 
 // Создание формы авторизации
-function createLoginForm(modalWrapper) {
-    const modal = new MODAL(modalWrapper);
+function createLoginForm(form) {
+    const modal = new MODAL(form);
     modal.showLoginForm();
-    const btn = modalWrapper.querySelector('button[type="submit"]');
-    btn.addEventListener('click', (e) => submitLogin(e, modalWrapper))
+    const btn = form.querySelector('button[type="submit"]');
+    btn.addEventListener('click', (e) => submitLogin(e, form));
 }
 
 // Получение с сервера токена авторизации. Запись токена в sessionStorage. Открытие сессии пользователя.
@@ -48,6 +51,7 @@ async function submitLogin(e, form) {
     if (!!token) {
         form.innerHTML = '';
         form.classList.add('modal--hide');
+        sessionStorage.clear();
         sessionStorage.token = JSON.stringify(token);
         loadUserCardsFromServer();
         openUserSession();
@@ -56,8 +60,19 @@ async function submitLogin(e, form) {
 
 // При открытии сессии кнопка логина меняется на кнопку создания визита.
 function openUserSession() {
-    visitBtn.classList.remove('btn--hide');
-    loginBtn.remove();
+    visitBtn.classList.remove('hide');
+    logOutBtn.classList.remove('hide');
+    loginBtn.classList.add('hide');
+}
+
+function closeSession() {
+    const cardWrapper = document.body.querySelector('.cards__content');
+    logOutBtn.classList.add('hide');
+    visitBtn.classList.add('hide');
+    loginBtn.classList.remove('hide');
+    sessionStorage.clear();
+    cardWrapper.innerHTML = '';
+    checkContent();
 }
 
 // Проверка текущей сесии при перезагрузке страници. Чтоб не появлялась кнопка логина.
@@ -70,36 +85,30 @@ function createVisitForm(modalWrapper) {
     const modal = new MODAL(modalWrapper);
     modal.showDefaultVisit();
     const doctorInput = modalWrapper.querySelector('#select-doctor');
+    const form = modalWrapper.querySelector('.form-visit');
 
     doctorInput.addEventListener('input', () => {
         modal.showSpecificFields(doctorInput.value);
-        const btn = modalWrapper.querySelector('button[type="submit"]');
-        btn.addEventListener('click', (e) => postVisitData(doctorInput.value, modal.createVisitParams(e)));
     });
+    form.addEventListener('submit', (e) => postVisitData(doctorInput.value, modal.createVisitParams(e), modalWrapper));
 }
 
 // Создание соответствующего визита. И отправка данных на сервер. Если отправка успешна, то создается карточка. 
-async function postVisitData(doctor, props) {
+async function postVisitData(doctor, props, form) {
     let newDoctor;
     if (doctor === "cardiologist") newDoctor = new VisitCardiologist(props);
     if (doctor === "dentist") newDoctor = new VisitDentist(props);
     if (doctor === "therapist") newDoctor = new VisitTherapist(props);
 
-    const visitDataResponse = await newDoctor.visit();
-    if (visitDataResponse.status === 200) {
-        const visitData = await visitDataResponse.json();
-        createCard(visitData);
-    } else {
-        alert('Не удалось создать карточку. Сервер не доступен');
+    const newVisitData = await newDoctor.visit();
+    if (!!newVisitData) {
+        mainObject.data.push(newVisitData);
+        mainObject.sortNow();
+        form.innerHTML = '';
+        form.classList.add('modal--hide');
+        renderFilteredCards();
+        checkContent();
     }
-}
-
-// Создание и отрисовка карточки. Добавление карточки в главный объект карточек. Проверка наличия контента на странице, чтоб убрать надпись "Нет карточек"
-function createCard(props) {
-    const card = new Card(props);
-    card.render();
-    mainObject.data.push(props);
-    checkContent();
 }
 
 // Если пользователь авторизован и есть токен, то происходит загрузка карточек, иначе отображается надпись "Нет карточек"
@@ -109,44 +118,58 @@ function createCard(props) {
 export async function loadUserCardsFromServer() {
     const data = await GetAllCards();
     mainObject.data = [...data];
-    mainObject.data.sort((a, b) => a.id - b.id).sort((a, b) => a.status < b.status ? -1 : a.status < b.status ? 1 : 0);
-    renderCards(mainObject.data);
+    mainObject.sortNow();
+    // renderCards(mainObject.data);
+    renderFilteredCards();
     checkContent();
 }
 
 // Отрисовка загруженных карточек при перезагрузке страницы
 export function renderCards(cards) {
-    console.log(cards);
-    cards.forEach(cardData => {
-        const item = new Card(cardData);
-        item.render();
+    console.log('mainObject', mainObject.data);
+    cards.forEach((cardData, i) => {
+        setTimeout(() => {
+            const item = new Card(cardData);
+            item.render();
+        }, 100 * i)
     })
 }
 
 // Проверка массива карточек на пустотудля отображения надписа "Нет карточек"
 export function checkContent() {
-    console.log('mainObject', mainObject.data);
     const noContent = document.body.querySelector('.no-content');
+    const searchBtns = document.body.querySelectorAll('button[name*="search"]');
     setTimeout(() => {
-        if (!!mainObject.data.length && !!sessionStorage.getItem('token')) {
-            noContent.classList.add('no-content--hide');
-        } else {
+        if (!sessionStorage.getItem('token')) {
+            noContent.innerHTML = 'You are not authorized';
             noContent.classList.remove('no-content--hide');
+            searchBtns.forEach(btn => btn.setAttribute('disabled', true));
+        } else if (!mainObject.data.length) {
+            noContent.innerHTML = 'No items have been added';
+            noContent.classList.remove('no-content--hide');
+        } else {
+            noContent.classList.add('no-content--hide');
+            searchBtns.forEach(btn => btn.removeAttribute('disabled'));
         }
     })
 }
 
 // Создание формы редактирования. Создание объекта новых данных карточки.
 export function createEditModal(cardData) {
-    const modalWrapper = document.querySelector('.modal');
+    const modalWrapper = document.body.querySelector('.modal');
     const modal = new MODAL(modalWrapper);
     const cardInfo = cardData;
     modal.showEditModal(cardInfo);
-    const btn = modalWrapper.querySelector('button[type="submit"]');
+    const btn = modalWrapper.querySelector('button.submit');
+    btn.setAttribute('disabled', true);
+    btn.textContent = 'Save Changes';
+    const form = modalWrapper.querySelector('.form-visit');
 
-    btn.addEventListener('click', (e) => {
+    form.addEventListener('submit', (e) => {
         const cardChanges = modal.createVisitParams(e);
         const newCardInfo = { ...cardInfo, ...cardChanges };
         cardData.saveChangesOnServer(newCardInfo);
+        modalWrapper.innerHTML = '';
+        modalWrapper.classList.add('modal--hide');
     });
 }

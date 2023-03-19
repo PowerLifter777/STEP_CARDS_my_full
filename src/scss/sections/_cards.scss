@@ -1,5 +1,5 @@
 .cards {
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .no-content,
@@ -8,6 +8,7 @@
   @include text-prop-lato(700, 30px, 30px, firebrick);
   font-family: Lato, sans-serif;
   text-align: center;
+  margin-top: 10%;
 
   &--hide {
     display: none;
@@ -15,16 +16,37 @@
 }
 
 .cards__content {
-  //display: none;
-  padding: 10px;
-  width: 100vw;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 30px;
+  padding: 30px;
+  justify-content: space-evenly;
+  align-items: start;
+  row-gap: 40px;
+  column-gap: 30px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 400px);
+  grid-auto-rows: fit-content;
+}
+
+@keyframes draw {
+  0% {
+    transform: scale(0.4);
+    top: 30px;
+  }
+
+  20% {
+    transform: scaleX(1) scaleY(1);
+    top: 70px;
+  }
+
+  100% {
+    transform: scale(1);
+    top: 0;
+  }
 }
 
 .card {
+  user-select: none;
+  transition: all 0.5s;
 
   &__container {
     position: relative;
@@ -36,9 +58,12 @@
     border-radius: 20px;
     @include flex-column();
     row-gap: 10px;
+    transform-origin: left top;
+    animation: draw 1.5s ease;
   }
 
-  &-change {
+  &-change,
+  &-date {
     position: absolute;
     top: 10px;
     right: 50px;
@@ -52,6 +77,14 @@
     }
   }
 
+  &-date {
+    left: 20px;
+    top: 7px;
+    font-size: 18px;
+    font-family: monospace, sans-serif;
+    width: 50%;
+  }
+
   &-del {
     position: absolute;
     top: 10px;
@@ -63,8 +96,8 @@
 
     &:hover {
       color: #bf1212;
+      transform: rotate(90deg);
     }
-
   }
 
   &__element {
@@ -176,7 +209,6 @@
     }
 
     &-text {
-
       @include text-prop-lato(600, 18px, 18px, $primary-color);
     }
   }
@@ -184,8 +216,6 @@
   &__urgency {
     width: 36%;
     padding: 5px;
-
-
     border-radius: 5px;
     align-items: center;
     @include flex-column();
@@ -199,7 +229,6 @@
     }
 
     &-body {
-
       padding: 5px;
       width: 50px;
       height: 50px;
@@ -208,12 +237,7 @@
       @include flex-column();
       align-items: center;
       row-gap: 3px;
-
-
-
     }
-
-
   }
 }
 
@@ -250,6 +274,11 @@
     background-color: $light-text-color;
     @include text-prop-lato(700, 16px, 16px, $light-color);
     cursor: pointer;
+    transition: all 0.25s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
   &__icon {
@@ -277,6 +306,11 @@
     background-color: $light-text-color;
     @include text-prop-lato(700, 16px, 16px, $light-color);
     cursor: pointer;
+    transition: all 0.25s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
   &__icon {
@@ -291,11 +325,9 @@
   }
 }
 
-
 .card-additional {
   @include flex-column();
   row-gap: 10px;
-
 
   &__purpose {
     border-radius: 5px;
@@ -303,7 +335,6 @@
     @include flex-column();
     row-gap: 10px;
     padding: 5px;
-
 
     &-title {
       @include text-prop-lato(600, 18px, 18px, $light-text-color);
@@ -330,7 +361,6 @@
     &-text {
       @include text-prop-lato(600, 18px, 18px, $primary-color);
     }
-
   }
 
   &__imt {
@@ -366,7 +396,6 @@
       @include text-prop-lato(600, 18px, 18px, $primary-color);
     }
   }
-
 
   &__pressure {
     background-color: rgba(214, 234, 245, 0.8);

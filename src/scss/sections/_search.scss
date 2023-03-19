@@ -1,6 +1,5 @@
 .search {
   &__container {
-    width: 90%;
     margin: 10px auto;
     padding: 30px;
     border-radius: 20px;
@@ -8,6 +7,23 @@
     align-items: center;
     justify-content: center;
     background-color: $bg-color;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  .search-buttons {
+    display: flex;
+    gap: 15px;
+
+    .disabled {
+      opacity: 0.4;
+      background-color: #97bad6;
+    }
   }
 }
 
+.search-form__select {
+  option[disabled] {
+    display: none;
+  }
+}

@@ -6,6 +6,7 @@ export class VISIT {
         this.urgency = urgency;
         this.patient = patient;
         this.status = 'open';
+        this.date = new Date().toLocaleString('ua').slice(0,-3);
     }
 
     createJSON(data) {
@@ -15,6 +16,7 @@ export class VISIT {
             urgency: this.urgency,
             patient: this.patient,
             status: this.status,
+            date: this.date,
             ...data,
         })
     }

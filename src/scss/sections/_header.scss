@@ -1,15 +1,27 @@
 .header {
   &__container {
-    width: 100vw;
-    height: 100px;
+    min-height: 100px;
     @include flex(space-between, center);
-    padding: 0 100px 0 20px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 30px 0;
+
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
   }
 
-  &__logo{
+  &__logo {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     column-gap: 10px;
+    flex: 1 1 auto;
+  }
+
+  .logo-text {
+    text-align: center;
   }
 }
 
@@ -19,6 +31,5 @@
 }
 
 .logo-text {
-  @include text-prop-lato(700,36px,42px,$primary-color);
+  @include text-prop-lato(700, 36px, 42px, $primary-color);
 }
-
