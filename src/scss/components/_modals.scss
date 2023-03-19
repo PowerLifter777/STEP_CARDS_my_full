@@ -35,7 +35,7 @@
       // max-height: 640px;
     }
   }
-  
+
   &-close {
     position: absolute;
     top: -35px;
@@ -43,7 +43,7 @@
     @include text-prop-lato(500, 50px, 50px, $light-color );
     cursor: pointer;
     transition: all 0.25s;
-    
+
     &:hover {
       color: #bf1212;
       transform: rotate(90deg);
