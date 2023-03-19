@@ -3,3 +3,4 @@ test123/
 .idea/
 package-lock.json
 *.iml
+*.zip
