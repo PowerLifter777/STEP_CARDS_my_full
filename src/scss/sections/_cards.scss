@@ -66,16 +66,22 @@
   &-date {
     position: absolute;
     top: 10px;
+
     right: 50px;
     color: $light-color;
     font-size: 30px;
     transition: all 0.25s;
+
+  }
+
+  &-change {
     cursor: pointer;
 
     &:hover {
       color: #bf1212;
     }
   }
+
 
   &-date {
     left: 20px;
